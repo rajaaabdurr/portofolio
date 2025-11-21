@@ -616,6 +616,19 @@ section, header {
   font-weight: 700;
   opacity: .95;
 }
+@media (max-width: 900px) {
+  .nav-links {
+    flex-direction: row;   /* tetap horizontal */
+    flex-wrap: wrap;       /* biar kalau kepanjangan, otomatis turun ke baris baru */
+    gap: 12px;
+    background: #3d405b;
+    padding: 10px 0;
+    justify-content: center; /* biar rapi di tengah */
+  }
+  .nav-links li {
+    text-align: center;
+  }
+}
 
 .nav-links a:hover {
   color: #e07a5f;
