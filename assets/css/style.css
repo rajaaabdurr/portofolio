@@ -805,3 +805,29 @@ section, header { scroll-margin-top: 140px; }
   .contact-box { padding: 30px 20px; }
   .slide-frame { height: 260px; }
 }
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #f4f1de; /* kontras dengan background */
+  cursor: pointer;
+  scroll-margin-left: auto;
+}
+
+@media (max-width: 900px) {
+  .menu-toggle {
+    display: block; /* tombol muncul di layar kecil */
+  }
+
+  .nav-links {
+    display: none; /* sembunyikan menu default */
+    flex-direction: column;
+    background: #3d405b;
+    padding: 10px 0;
+  }
+
+  .nav-links.show {
+    display: flex; /* tampilkan saat toggle aktif */
+  }
+}

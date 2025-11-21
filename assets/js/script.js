@@ -76,7 +76,10 @@ function updateNavbar() {
   const navLinks = document.querySelectorAll(".nav-links a");
   navLinks.forEach((a) => {
     const href = a.getAttribute("href");
-    a.classList.toggle("active", href === `${currentSection}.html` || href === `#${currentSection}`);
+    a.classList.toggle(
+      "active",
+      href === `${currentSection}.html` || href === `#${currentSection}`
+    );
   });
 }
 window.addEventListener("scroll", updateNavbar);
@@ -84,20 +87,20 @@ window.addEventListener("load", updateNavbar);
 
 // ✨ Modular loader
 const mainContent = document.getElementById("mainContent");
-const navLinks = document.querySelectorAll(".nav-links a");
-navLinks.forEach(link => {
+const navLinksAll = document.querySelectorAll(".nav-links a");
+navLinksAll.forEach((link) => {
   link.addEventListener("click", (e) => {
     const href = link.getAttribute("href");
     if (href.endsWith(".html") && mainContent) {
       e.preventDefault();
       fetch(href)
-        .then(res => res.text())
-        .then(data => {
+        .then((res) => res.text())
+        .then((data) => {
           mainContent.innerHTML = data;
           window.scrollTo({ top: mainContent.offsetTop, behavior: "smooth" });
           showOnScroll();
         })
-        .catch(err => console.error("Gagal load konten:", err));
+        .catch((err) => console.error("Gagal load konten:", err));
     }
   });
 });
@@ -121,7 +124,7 @@ if (yearSpan) {
   yearSpan.textContent = new Date().getFullYear();
 }
 
-// ✨ Navbar hide/show saat scroll (reusable)
+// ✨ Navbar hide/show saat scroll
 function initScrollNavbar() {
   const navbar = document.querySelector(".navbar");
   if (!navbar) return;
@@ -138,13 +141,22 @@ function initScrollNavbar() {
   });
 }
 
-// ✨ Panggil setelah navbar dimuat
+// ✨ Load navbar + aktifkan toggle
 const navbarContainer = document.getElementById("navbar");
 if (navbarContainer) {
   fetch("navbar.html")
-    .then(res => res.text())
-    .then(data => {
+    .then((res) => res.text())
+    .then((data) => {
       navbarContainer.innerHTML = data;
-      initScrollNavbar(); // aktifkan scroll logic
+      initScrollNavbar();
+
+      // aktifkan hamburger/titik tiga
+      const toggle = document.querySelector(".menu-toggle");
+      const navLinksContainer = document.querySelector(".nav-links");
+      if (toggle && navLinksContainer) {
+        toggle.addEventListener("click", () => {
+          navLinksContainer.classList.toggle("show");
+        });
+      }
     });
 }
